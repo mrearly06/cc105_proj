@@ -1,0 +1,22 @@
+li a{
+    cursor: pointer;
+  }
+  nav{
+    height: 80px;
+    background-color: 	rgb(16,16,16);
+  }
+
+  .navbar-brand, .nav-link{
+    font-weight: 700;
+    color: 	rgb(129, 162, 228);
+  }
+  .active-home, .active-post, .active-sign-up, .active-sign-in{
+    background-color: rgb(255,255,255,20%);
+    border-radius: 6%;
+  }
+li{
+  width: 150px;
+}
+  
+  
+  
