@@ -70,6 +70,13 @@ export class PostService {
         console.log('Comment added to Firebase');
       });
   }
+  deleteComment(postIndex: number, commentIndex: number) {
+    this.listOfPosts[postIndex].comments.splice(commentIndex, 1);
+    this.http.patch(`https://projectpost-12d4d-default-rtdb.asia-southeast1.firebasedatabase.app/posts/${postIndex}.json`, { comments: this.listOfPosts[postIndex].comments })
+      .subscribe(() => {
+        console.log('Comment deleted from Firebase');
+      });
+  }
   updateComment(postIndex: number, commentIndex: number, updatedComment: string) {
     this.listOfPosts[postIndex].comments[commentIndex] = updatedComment;
     this.http.patch(`https://projectpost-12d4d-default-rtdb.asia-southeast1.firebasedatabase.app/posts/${postIndex}.json`, { comments: this.listOfPosts[postIndex].comments })

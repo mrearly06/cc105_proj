@@ -10,14 +10,29 @@ import { PostEditComponent } from './post-edit/post-edit.component';
 import { Routes } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AuthService } from './auth.service';
+
+
 
 const routes: Routes = [
-  { path: '', redirectTo: 'post-list', pathMatch: 'full' },
+  { path: '', redirectTo: '/auth-si', pathMatch: 'full' },
   { path: 'post-list', component: PostListComponent },
   { path: 'post-add', component: PostEditComponent },
-  { path: 'authentication', component: AuthComponent },
+  { path: 'auth-si', component: AuthComponent },
   { path: 'post-edit/:index', component: PostEditComponent },
+ 
 ]
+const firebaseConfig = {
+  apiKey: "AIzaSyBAUCnP_1vxhjCpdp4W5T4u3dUO3v3pTxA",
+  authDomain: "projectpost-12d4d.firebaseapp.com",
+  databaseURL: "https://projectpost-12d4d-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "projectpost-12d4d",
+  storageBucket: "projectpost-12d4d.appspot.com",
+  messagingSenderId: "754345797045",
+  appId: "1:754345797045:web:463f95868adf98d96425fc",
+  measurementId: "G-HPYZDK2Y4Z"
+};
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,9 +47,11 @@ const routes: Routes = [
     FormsModule,
     RouterModule.forRoot(routes),
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularFireModule.initializeApp(firebaseConfig)
+  
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

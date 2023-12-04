@@ -1,7 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Post } from '../post.model';
 import { PostService } from '../post.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
+
 
 @Component({
   selector: 'app-post',
@@ -13,9 +15,14 @@ export class PostComponent implements OnInit {
   memberName = "Lan";
   editMode = false;
   editIndex: number | null = null;
+  posts: Post[] = [];
  
-  constructor(private postService: PostService, private router: Router) {
+  @Output() isLogout = new EventEmitter<void>()
+
+  constructor(private postService: PostService, private router: Router,public authServise:AuthService) {
   }
+
+  
   @Input() index: number = 0;
   @Input() post?: Post;
   comments: string[] = [];
@@ -42,6 +49,15 @@ export class PostComponent implements OnInit {
     this.comments = this.postService.getComments(this.index); // Refresh the comments
     this.editMode = false;
     this.editIndex = null;
+  }
+  onCancelUpdate() {
+    // Exit the edit mode
+    this.editMode = false;
+    this.editIndex = null;
+  }
+  onDeleteComment(commentIndex: number) {
+    this.postService.deleteComment(this.index, commentIndex);
+    this.comments = this.postService.getComments(this.index); // Refresh the comments
   }
   onEditComment(index: number) {
     this.editMode = true;

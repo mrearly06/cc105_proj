@@ -17,6 +17,18 @@ li a{
 li{
   width: 150px;
 }
-  
+  .dropdown-menu-left {
+  left: 0;
+  right: auto;
+}
+.nav{
+  margin-right: 25px;
+}
+.dropdown{
+  padding-right: 10px;
+  padding-left: 16px;
+ margin-top:auto;
+ margin-bottom: auto;
+}
   
   
