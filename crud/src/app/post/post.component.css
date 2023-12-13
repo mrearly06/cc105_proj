@@ -1,5 +1,13 @@
 
-
+.container{
+    background-color: rgb(241, 244, 244);
+    width: 50%;
+    border-radius: 1.6%;
+    margin-top: 1.6%;
+    margin-bottom: 1.6%;
+    box-shadow: -5px -5px 35px 	rgb(160,160,160), 5px 5px 10px rgb(160,160,160);
+    
+}
 .img-responsive{
    
     border:2px solid rgb(168,168,168,35%);

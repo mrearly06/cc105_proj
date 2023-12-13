@@ -13,6 +13,7 @@ li a{
   .active-home, .active-post, .active-sign-up, .active-sign-in{
     background-color: rgb(255,255,255,20%);
     border-radius: 6%;
+    border: 2px solid rgb(208,208,208);
   }
 li{
   width: 150px;
@@ -30,5 +31,22 @@ li{
  margin-top:auto;
  margin-bottom: auto;
 }
+  .fa-user{
+    font-size: 22px;
+  }
+  .dropdown-menu{
+      border: 2px solid rgb(255,255,255);
+  }
+ 
+  .dropdown-item:hover {
+    background-color: transparent !important;
+    color: rgb(129, 162, 228) !important;
+    
+  }
+  .dropdown-menu li:nth-child(3) .dropdown-item {
+    border-bottom: 1px solid white;
+    
+  }
+  
   
   

@@ -12,15 +12,22 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AuthService } from './auth.service';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { AuthGuard } from './authGuard.service';
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { getStorage, provideStorage } from '@angular/fire/storage';
+import { EditProfileModalComponent } from './edit-profile-modal/edit-profile-modal.component';
+
 
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/auth-si', pathMatch: 'full' },
-  { path: 'post-list', component: PostListComponent },
-  { path: 'post-add', component: PostEditComponent },
+  { path: '', redirectTo: 'auth-si', pathMatch: 'full' },
+  { path: 'post-list', component: PostListComponent, canActivate: [AuthGuard] },
+  { path: 'post-add', component: PostEditComponent, canActivate: [AuthGuard] },
   { path: 'auth-si', component: AuthComponent },
-  { path: 'post-edit/:index', component: PostEditComponent },
+  { path: 'post-edit/:index', component: PostEditComponent, canActivate: [AuthGuard] },
+  { path: 'user-profile', component: UserProfileComponent, canActivate: [AuthGuard] }
  
 ]
 const firebaseConfig = {
@@ -40,7 +47,9 @@ const firebaseConfig = {
     HeaderComponent,
     PostComponent,
     PostListComponent,
-    PostEditComponent
+    PostEditComponent,
+    UserProfileComponent,
+    EditProfileModalComponent
   ],
   imports: [
     BrowserModule,
@@ -48,8 +57,9 @@ const firebaseConfig = {
     RouterModule.forRoot(routes),
     ReactiveFormsModule,
     HttpClientModule,
-    AngularFireModule.initializeApp(firebaseConfig)
-  
+    AngularFireModule.initializeApp(firebaseConfig),
+    provideFirebaseApp(() => initializeApp(firebaseConfig)),
+    provideStorage(() => getStorage()),
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
